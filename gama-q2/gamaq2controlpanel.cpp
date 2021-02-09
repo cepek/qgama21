@@ -143,7 +143,7 @@ void GamaQ2ControlPanel::init_schema_lists()
             {
                 // create table "table name" (
                 tmptab << line.split(QString(" "),
-                    QString::SkipEmptyParts, Qt::CaseInsensitive)[2];
+                    Qt::SkipEmptyParts, Qt::CaseInsensitive)[2];
             }
 
             if (line.contains(";")) break;  // end of the SQL command

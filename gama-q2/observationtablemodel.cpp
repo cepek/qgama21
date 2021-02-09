@@ -367,13 +367,13 @@ QVariant ObservationTableModel::data(const QModelIndex &index, int role) const
         {
         case indVal:
         case indStdev:
-            return (Qt::AlignVCenter + Qt::AlignRight);
+            return (Qt::AlignRight);
         case indActive:
         case indName:
-            return (Qt::AlignVCenter + Qt::AlignHCenter);
+            return (Qt::AlignHCenter);
         }
 
-        if (col >= indColumnCount) return (Qt::AlignVCenter + Qt::AlignRight);
+        if (col >= indColumnCount) return (Qt::AlignRight);
 
         return QVariant();
     }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.7)
 
 project(gama-q2 LANGUAGES CXX)
 
@@ -32,7 +32,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-DGNU_gama_expat_1_1)  # if we use local copy of expat sources
 include_directories(gama/lib gama-q2)
 
-find_package(Qt5 COMPONENTS Core Gui Svg Sql Widgets PrintSupport REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Sql Widgets PrintSupport Core5Compat SvgWidgets REQUIRED)
 
 set(Q2SRC
     gama-q2/main.cpp
@@ -103,6 +103,6 @@ else()
   )
 endif()
 
-target_link_libraries(gama-q2 PRIVATE Qt5::Widgets Qt5::Sql Qt5::Svg  Qt5::PrintSupport)
+target_link_libraries(gama-q2 PRIVATE Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::Core5Compat Qt6::SvgWidgets)
 
 add_subdirectory(gama)

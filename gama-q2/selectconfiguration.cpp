@@ -143,7 +143,7 @@ void SelectConfiguration::select()
 
 void SelectConfiguration::on_lineEdit_ConfigurationName_textChanged(const QString &arg1)
 {
-    const QRegExp whitespaces("\\s");
+    const QRegularExpression whitespaces("\\s");
     lineEdit_ConfigurationName->setText(QString(arg1).remove(whitespaces));
 
     bool found  = false;

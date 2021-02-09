@@ -366,7 +366,7 @@ void InsertObservationDialog::getPointID(QString tag, QLineEdit *edit, bool isTa
 
     if (isTarget && isObsAngle)
     {
-        QStringList list = edit->text().split(QRegExp("\\s*;\\s*"));
+        QStringList list = edit->text().split(QRegularExpression("\\s*;\\s*"));
 
         if (list.size() != 2 || list[0].isEmpty() || list[1].isEmpty())
         {
@@ -391,7 +391,7 @@ void InsertObservationDialog::getPointID(QString tag, QLineEdit *edit, bool isTa
     }
 
     QString tst = isTarget ? target1 + target2 : standpoint;
-    if (tst.contains(QRegExp("\\s")))
+    if (tst.contains(QRegularExpression("\\s")))
         setWarning(tag, tr("ID must not contain whitespaces"));
 }
 
