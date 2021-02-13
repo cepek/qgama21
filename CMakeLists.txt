@@ -11,10 +11,19 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# CMAKE_PREFIX_PATH By default this is empty. It is intended to be set by the project.
+# CMAKE_PREFIX_PATH  By default this is empty. It is intended to be set by the project.
+# If you use Qt Creator to build the project, you can use CMakeLists.txt as it is.
 #
-#set(CMAKE_PREFIX_PATH "/home/cepek/Qt/5.15.0/gcc_64/lib/cmake/Qt5/") # example linux
-#set(CMAKE_PREFIX_PATH "C:/Qt/5.15.0/msvc2019_64/lib/cmake/Qt5/")     # example windows
+#set(CMAKE_PREFIX_PATH "~/Qt/6.0.1/gcc_64/")           # example linux
+#
+# or set up the environment variable CMAKE_PREFIX_PATH, for example
+#
+#   $ export CMAKE_PREFIX_PATH=~/Qt/6.0.1/gcc_64/
+#   $ cmake .. -GNinja
+#   $ cmake --build .
+#
+#
+#set(CMAKE_PREFIX_PATH "C:/Qt/6.0.1/msvc2019_64/")     # example windows
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
