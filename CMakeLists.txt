@@ -103,18 +103,18 @@ set(Q2SRC
     )
 
 if(ANDROID)
-  add_library(${PROJECT_NAME} SHARED
+  add_library(gama-q2 SHARED
     ${Q2SRC}
     $<TARGET_OBJECTS:libgama>
   )
 else()
-  add_executable(${PROJECT_NAME}
+  add_executable(gama-q2
     ${Q2SRC}
     $<TARGET_OBJECTS:libgama>
   )
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(gama-q2 PRIVATE
   Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::Core5Compat Qt6::SvgWidgets)
 
 add_subdirectory(gama)  # git clone https://git.savannah.gnu.org/git/gama.git
