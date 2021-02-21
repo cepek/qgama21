@@ -11,21 +11,22 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# CMAKE_PREFIX_PATH  By default this is empty. It is intended to be set by the project.
-# If you use Qt Creator to build the project, you can use CMakeLists.txt as it is.
+# CMAKE_PREFIX_PATH  By default this is empty. It is intended to be set by
+# the project. If you use Qt Creator to build the project, you can use
+# CMakeLists.txt as it is.
 #
 #set(CMAKE_PREFIX_PATH "~/Qt/6.0.1/gcc_64/")           # example linux
 #
 # or set up the environment variable CMAKE_PREFIX_PATH, for example
 #
 #   $ export CMAKE_PREFIX_PATH=~/Qt/6.0.1/gcc_64/
-#   $ cmake .. -GNinja
+#   $ cmake .. -G Ninja
 #   $ cmake --build .
-#
 #
 #set(CMAKE_PREFIX_PATH "C:/Qt/6.0.1/msvc2019_64/")     # example windows
 
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
+# QtCreator supports the following variables for Android, which are
+# identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
 
@@ -41,7 +42,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_definitions(-DGNU_gama_expat_1_1)  # if we use local copy of expat sources
 include_directories(gama/lib gama-q2)
 
-find_package(Qt6 COMPONENTS Core Gui Sql Widgets PrintSupport Core5Compat SvgWidgets REQUIRED)
+find_package(Qt6 COMPONENTS
+  Core Gui Sql Widgets PrintSupport Core5Compat SvgWidgets REQUIRED)
 
 set(Q2SRC
     gama-q2/main.cpp
@@ -112,6 +114,7 @@ else()
   )
 endif()
 
-target_link_libraries(gama-q2 PRIVATE Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::Core5Compat Qt6::SvgWidgets)
+target_link_libraries(gama-q2 PRIVATE
+  Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::Core5Compat Qt6::SvgWidgets)
 
-add_subdirectory(gama)
+add_subdirectory(gama)  # git clone https://git.savannah.gnu.org/git/gama.git
