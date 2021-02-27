@@ -181,7 +181,7 @@ NetworkAdjustmentPanel::NetworkAdjustmentPanel(QString connectionName, QWidget *
     // Help menu
 
     menuHelp  = new QMenu(tr("&Help"), this);
-    action = menuHelp->addAction(tr("Gama-q2 &Help"));
+    action = menuHelp->addAction(tr("Qgama &Help"));
     connect(action, &QAction::triggered, this, [this](){action_Gama_q2_help();});
     /*
     menuBar()->addMenu(menuFile);

@@ -129,7 +129,7 @@ void Adjustment::read_configuration(QSqlQuery& q, const QString& configuration)
   else
     lnet->set_degrees();
 
-  // the following two attributes are not used in gama-q2 ------------
+  // the following two attributes are not used in qgama --------------
   latitude = q.value(Index::latitude).toDouble()*M_PI/(lnet->gons() ? 200 : 180);
   ellipsoid.clear();
   if (!q.value(Index::ellipsoid).isNull())  ellipsoid = q.value(Index::ellipsoid).toString();

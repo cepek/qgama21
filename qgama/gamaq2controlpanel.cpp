@@ -74,8 +74,8 @@ GamaQ2ControlPanel::GamaQ2ControlPanel(QWidget *parent) :
 
     init_schema_lists();
 
-    GamaQ2::name      = "gama-q2";
-    GamaQ2::version   = "1.04";
+    GamaQ2::name      = "qgama";
+    GamaQ2::version   = "2.00";
     GamaQ2::copyright = "2021";
 
     // setting implicit adjustment results language
@@ -208,12 +208,12 @@ void GamaQ2ControlPanel::build_menus()
     connect(actionApplicationFont, SIGNAL(triggered()), SLOT(on_action_Application_Font()));
 
     QMenu* menuHelp = new QMenu(tr("&Help"), this);
-    actionGamaQ2help = menuHelp->addAction(tr("Gama-q2 &help"));
-    // the very first c++11 lambda function in gama-q2 (2015-07-29)
+    actionGamaQ2help = menuHelp->addAction(tr("Qgama &help"));
+    // the very first c++11 lambda function in qgama (2015-07-29)
     // https://wiki.qt.io/New_Signal_Slot_Syntax
     connect(actionGamaQ2help, &QAction::triggered, [](){GamaQ2help::get()->show();});
     menuHelp->addSeparator();
-    actionAboutGamaQ2 = menuHelp->addAction(tr("&About gama-q2"));
+    actionAboutGamaQ2 = menuHelp->addAction(tr("&About Qgama"));
     connect(actionAboutGamaQ2, SIGNAL(triggered()), SLOT(on_action_About_gama_q2_triggered()));
     actionAboutQt = menuHelp->addAction(tr("About &Qt"));
     connect(actionAboutQt, SIGNAL(triggered()), SLOT(on_action_About_qt_triggered()));
@@ -371,7 +371,7 @@ void GamaQ2ControlPanel::on_action_About_gama_q2_triggered()
     QMessageBox about(this);
     about.setIconPixmap(windowIcon().pixmap(iconSize().width()*2));
 
-    about.setWindowTitle(tr("About gama-q2"));
+    about.setWindowTitle(tr("About QGama"));
     about.setTextFormat(Qt::RichText);
     about.setText(tr("<p>Adjustment of geodetic networks with database support</p>") +
 
@@ -439,7 +439,7 @@ void GamaQ2ControlPanel::on_action_Application_Font()
     {
        QApplication::setFont(font);
        QSettings settings;
-       settings.setValue("gama-q2-font", QApplication::font().toString());
+       settings.setValue("qgama-font", QApplication::font().toString());
     }
 }
 

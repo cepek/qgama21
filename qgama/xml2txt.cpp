@@ -113,9 +113,8 @@ void GNU_gama::xml2txt_general_parameters(std::ostream& cout, const Adjustment& 
        << setw(w_)  << f_z
        << '\n';
 
-  for (int ii=0; ii<w0+1+3*w_+1; ii++) {
-      cout << '-'; cout << "\n";
-    }
+  for (int ii=0; ii<w0+1+3*w_+1; ii++) cout << '-';
+  cout << "\n";
 
   cout.setf(ios_base::left,  ios_base::adjustfield);
   cout << setw(w0) << T_GaMa_gpar1_total << ":";

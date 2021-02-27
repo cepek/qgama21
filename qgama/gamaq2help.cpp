@@ -39,9 +39,9 @@ GamaQ2help* GamaQ2help::get()
 
 GamaQ2help::GamaQ2help(QWidget *parent) : QMainWindow(parent)
 {
-    setWindowTitle(tr("gama-q2 help"));
+    setWindowTitle(tr("Qgama help"));
 
-    QFile file(":/help/gama-q2.html");
+    QFile file(":/help/qgama.html");
     file.open(QIODevice::ReadOnly);
     QString text = file.readAll();
 

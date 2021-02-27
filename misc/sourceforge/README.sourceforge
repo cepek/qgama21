@@ -1,7 +1,7 @@
 Copy to "new-release"
 =====================
 
-1) gama-q2.exe and run "windeployqt gama-q2.exe"
+1) gama-q2.exe and run "windeployqt qgama.exe"
    # https://doc.qt.io/qt-5/windows-deployment.html
 
 2) gama-local.exe and gama-g3.exe

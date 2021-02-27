@@ -27,14 +27,14 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setOrganizationName("GNU Gama");
     QCoreApplication::setOrganizationDomain("gnu.org/software/gama/");
-    QCoreApplication::setApplicationName("gama-q2");
+    QCoreApplication::setApplicationName("qgama");
 
     QApplication a(argc, argv);
     QIcon icon(":/img/g-logo.svg");
     QApplication::setWindowIcon(icon);
 
     QSettings settings;
-    QVariant sf = settings.value("gama-q2-font");
+    QVariant sf = settings.value("qgama-font");
     if (sf.isValid())
       {
         QFont font;
