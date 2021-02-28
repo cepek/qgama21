@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>help/gama-q2.html</file>
+        <file>help/qgama.html</file>
         <file>examples/example_01.gkf</file>
         <file>examples/example_02.gkf</file>
         <file>examples/example_03.gkf</file>
