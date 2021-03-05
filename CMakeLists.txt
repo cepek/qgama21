@@ -43,7 +43,7 @@ add_definitions(-DGNU_gama_expat_1_1)  # if we use local copy of expat sources
 include_directories(gama/lib qgama)
 
 find_package(Qt6 COMPONENTS
-  Core Gui Sql Widgets PrintSupport Core5Compat SvgWidgets REQUIRED)
+  Core Gui Sql Widgets PrintSupport SvgWidgets REQUIRED)
 
 set(Q2SRC
     qgama/main.cpp
@@ -115,6 +115,6 @@ else()
 endif()
 
 target_link_libraries(qgama PRIVATE
-  Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::Core5Compat Qt6::SvgWidgets)
+  Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::SvgWidgets)
 
 add_subdirectory(gama)  # git clone https://git.savannah.gnu.org/git/gama.git
