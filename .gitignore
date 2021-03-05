@@ -15,10 +15,10 @@
 *.autosave
 QuickStart.html
 
-# gama-q2
-#########
+# qgama
+#######
 moc_*
-qrc_gama*
+qrc_qgama*
 ui_*.h
 *.pro.user
 *.pro.user.*
@@ -29,6 +29,7 @@ build*
 Makefile
 dox
 *.bak
+qgama-*.tar.gz
 
 .idea
 
