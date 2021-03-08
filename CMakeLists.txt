@@ -59,11 +59,6 @@ set(Q2SRC
     qgama/dbfunctions.h
     qgama/drawsettings.cpp
     qgama/drawsettings.h
-    qgama/qgamacontrolpanel.cpp
-    qgama/qgamacontrolpanel.h
-    qgama/qgamahelp.cpp
-    qgama/qgamahelp.h
-    qgama/qgamainterfaces.h
     qgama/importconfigurationfile.cpp
     qgama/importconfigurationfile.h
     qgama/insertclusterdialog.cpp
@@ -88,6 +83,11 @@ set(Q2SRC
     qgama/pointtablemodel.h
     qgama/pointtypecombobox.cpp
     qgama/pointtypecombobox.h
+    qgama/qgamacontrolpanel.cpp
+    qgama/qgamacontrolpanel.h
+    qgama/qgamahelp.cpp
+    qgama/qgamahelp.h
+    qgama/qgamainterfaces.h
     qgama/selectadjresultslanguage.cpp
     qgama/selectadjresultslanguage.h
     qgama/selectconfiguration.cpp
