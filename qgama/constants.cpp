@@ -19,52 +19,52 @@
 
 #include "constants.h"
 
-QString GamaQ2::name;
-QString GamaQ2::version;
-QString GamaQ2::copyright;
+QString QGama::name;
+QString QGama::version;
+QString QGama::copyright;
 
-QStringList GamaQ2::gama_local_schema;
-QStringList GamaQ2::gama_local_schema_table_names;
+QStringList QGama::gama_local_schema;
+QStringList QGama::gama_local_schema_table_names;
 
-QStringList GamaQ2::languages;
-QString GamaQ2::currentLanguage;
+QStringList QGama::languages;
+QString QGama::currentLanguage;
 
-const QString GamaQ2::connection_implicit_db     = "connection_implicit_db";
-const QString GamaQ2::connection_dbf_drop_tables = "connection_dbf_drop_tables";
+const QString QGama::connection_implicit_db     = "connection_implicit_db";
+const QString QGama::connection_dbf_drop_tables = "connection_dbf_drop_tables";
 
-const QString GamaQ2::obsClusterName = "obs";
-const QString GamaQ2::xyzClusterName = "xyz";
-const QString GamaQ2::hdfClusterName = "hdf";
-const QString GamaQ2::vecClusterName = "vec";
+const QString QGama::obsClusterName = "obs";
+const QString QGama::xyzClusterName = "xyz";
+const QString QGama::hdfClusterName = "hdf";
+const QString QGama::vecClusterName = "vec";
 
-const QString GamaQ2::distObsName    = "dist.";
-const QString GamaQ2::dirObsName     = "dir.";
-const QString GamaQ2::angleObsName   = "angle";
-const QString GamaQ2::azimObsName    = "azim.";
-const QString GamaQ2::hdifObsName    = "h dif";
-const QString GamaQ2::xdifObsName    = "x dif";
-const QString GamaQ2::ydifObsName    = "y dif";
-const QString GamaQ2::zdifObsName    = "z dif";
-const QString GamaQ2::xObsName       = "x";
-const QString GamaQ2::yObsName       = "y";
-const QString GamaQ2::zObsName       = "z";
-const QString GamaQ2::slopeObsName   = "slope";
-const QString GamaQ2::zangleObsName  = "zangle";
+const QString QGama::distObsName    = "dist.";
+const QString QGama::dirObsName     = "dir.";
+const QString QGama::angleObsName   = "angle";
+const QString QGama::azimObsName    = "azim.";
+const QString QGama::hdifObsName    = "h dif";
+const QString QGama::xdifObsName    = "x dif";
+const QString QGama::ydifObsName    = "y dif";
+const QString QGama::zdifObsName    = "z dif";
+const QString QGama::xObsName       = "x";
+const QString QGama::yObsName       = "y";
+const QString QGama::zObsName       = "z";
+const QString QGama::slopeObsName   = "slope";
+const QString QGama::zangleObsName  = "zangle";
 
-const QString GamaQ2::vectorObsName      = "vector";
-const QString GamaQ2::coordinateObsName  = "coordinates";
+const QString QGama::vectorObsName      = "vector";
+const QString QGama::coordinateObsName  = "coordinates";
 
-const QString GamaQ2::delegate_style_sheet = "QLineEdit {"
+const QString QGama::delegate_style_sheet = "QLineEdit {"
                                              " border: 0px white;"
                                              " background: white;"
                                              "}";
 
-const QColor GamaQ2::colorClusterHeader     = QColor(210,210,210);
-const QColor GamaQ2::colorPassiveBackground = QColor(240,240,240);   // Qt::lightGray is too dark
-const QColor GamaQ2::colorOutsideCovMat     = Qt::lightGray;
-const QColor GamaQ2::colorSingularCovMat    = Qt::red;
+const QColor QGama::colorClusterHeader     = QColor(210,210,210);
+const QColor QGama::colorPassiveBackground = QColor(240,240,240);   // Qt::lightGray is too dark
+const QColor QGama::colorOutsideCovMat     = Qt::lightGray;
+const QColor QGama::colorSingularCovMat    = Qt::red;
 
-int GamaQ2::getUnique()
+int QGama::getUnique()
 {
     static int unique;
     return ++unique;

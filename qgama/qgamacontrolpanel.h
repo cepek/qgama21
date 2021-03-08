@@ -28,13 +28,13 @@
 
 class DbInterface;
 
-class GamaQ2ControlPanel : public QMainWindow
+class QGamaControlPanel : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit GamaQ2ControlPanel(QWidget *parent = nullptr);
-    ~GamaQ2ControlPanel();
+    explicit QGamaControlPanel(QWidget *parent = nullptr);
+    ~QGamaControlPanel();
 
     void set_adjustment_results_language(QString language = QString());
 

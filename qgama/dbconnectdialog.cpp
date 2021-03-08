@@ -173,8 +173,8 @@ void DBConnectDialog::create_missing_tables(QSqlDatabase& db)
 
     db.transaction();
     for (QStringList::const_iterator
-            i = GamaQ2::gama_local_schema.cbegin(),
-            e = GamaQ2::gama_local_schema.cend();   i!=e; ++i)
+            i = QGama::gama_local_schema.cbegin(),
+            e = QGama::gama_local_schema.cend();   i!=e; ++i)
     {
         query.exec(*i);
         if (query.lastError().isValid())
@@ -248,8 +248,8 @@ void DBConnectDialog::on_buttonBox_accepted()
     if (database_name != ":memory:")
     {
         QStringList tables = db.tables();
-        for (QStringList::const_iterator i=GamaQ2::gama_local_schema_table_names.cbegin(),
-                                         e=GamaQ2::gama_local_schema_table_names.cend(); i!=e; ++i)
+        for (QStringList::const_iterator i=QGama::gama_local_schema_table_names.cbegin(),
+                                         e=QGama::gama_local_schema_table_names.cend(); i!=e; ++i)
             if (!tables.contains(*i, Qt::CaseInsensitive))
             {
                 missing++;
@@ -262,7 +262,7 @@ void DBConnectDialog::on_buttonBox_accepted()
     {
         create_missing_tables(db);
     }
-    else if (missing > 0 && missing < GamaQ2::gama_local_schema_table_names.size())
+    else if (missing > 0 && missing < QGama::gama_local_schema_table_names.size())
     {
         QMessageBox::critical(this, tr("Bad Database Schema Tables"),
                                     tr("One or more (but not all) of the Gnu Gama schema tables "
@@ -274,7 +274,7 @@ void DBConnectDialog::on_buttonBox_accepted()
         on_buttonBox_rejected();
         return;
     }
-    else if (missing == GamaQ2::gama_local_schema_table_names.size())
+    else if (missing == QGama::gama_local_schema_table_names.size())
     {
         int ret = QMessageBox::question(this, tr("No Database Schema Tables"),
                                         tr("Gnu Gama schema tables are missing in the database.\n\n"

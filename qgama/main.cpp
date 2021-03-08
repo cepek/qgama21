@@ -21,7 +21,7 @@
 
 #include <QApplication>
 #include <QSettings>
-#include "gamaq2controlpanel.h"
+#include "qgamacontrolpanel.h"
 
 int main(int argc, char *argv[])
 {
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     // https://en.cppreference.com/w/cpp/locale/locale/classic
     std::locale::global( std::locale::classic() );
 
-    GamaQ2ControlPanel w;
+    QGamaControlPanel w;
     w.show();
 
     return a.exec();

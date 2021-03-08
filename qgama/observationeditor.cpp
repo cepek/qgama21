@@ -101,7 +101,7 @@ ObservationEditor::ObservationEditor(QWidget *parent) :
 {
     LineEditDelegate* item = new LineEditDelegate(tableView);
     tableView->setItemDelegate(item);
-    tableView->setStyleSheet(GamaQ2::delegate_style_sheet);
+    tableView->setStyleSheet(QGama::delegate_style_sheet);
 
     tableView->verticalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
     observationMenu = new QMenu(this);

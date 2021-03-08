@@ -47,17 +47,17 @@ InsertObservationDialog::InsertObservationDialog(QString cluster_name, QWidget *
     comboPosition->addItem(tr("Before the Slecter Observation"));
     comboPosition->addItem(tr("First observation in the Cluster"));
 
-    if (clusterName == GamaQ2::obsClusterName)
+    if (clusterName == QGama::obsClusterName)
     {
         setWindowTitle(tr("Insert observation"));
 
         comboObservation = new QComboBox(this);
-        comboObservation->addItem(GamaQ2::distObsName);
-        comboObservation->addItem(GamaQ2::dirObsName);
-        comboObservation->addItem(GamaQ2::angleObsName);
-        comboObservation->addItem(GamaQ2::azimObsName);
-        comboObservation->addItem(GamaQ2::slopeObsName);
-        comboObservation->addItem(GamaQ2::zangleObsName);
+        comboObservation->addItem(QGama::distObsName);
+        comboObservation->addItem(QGama::dirObsName);
+        comboObservation->addItem(QGama::angleObsName);
+        comboObservation->addItem(QGama::azimObsName);
+        comboObservation->addItem(QGama::slopeObsName);
+        comboObservation->addItem(QGama::zangleObsName);
 
         formLayout->addRow(tr("Observation"), comboObservation);
         formLayout->addRow(tr("Position"),    comboPosition);
@@ -65,7 +65,7 @@ InsertObservationDialog::InsertObservationDialog(QString cluster_name, QWidget *
         formLayout->addRow(tr("To"   ), lineEditTo    = new QLineEdit(this));
         formLayout->addRow(tr("Value"), lineEditValue = new QLineEdit(this));
     }
-    else if (clusterName == GamaQ2::xyzClusterName)
+    else if (clusterName == QGama::xyzClusterName)
     {
         setWindowTitle(tr("Insert coordinates"));
 
@@ -76,7 +76,7 @@ InsertObservationDialog::InsertObservationDialog(QString cluster_name, QWidget *
         formLayout->addRow(tr("Z"), lineEditZ = new QLineEdit(this));
 
     }
-    else if (clusterName == GamaQ2::hdfClusterName)
+    else if (clusterName == QGama::hdfClusterName)
     {
         setWindowTitle(tr("Insert height difference"));
 
@@ -85,7 +85,7 @@ InsertObservationDialog::InsertObservationDialog(QString cluster_name, QWidget *
         formLayout->addRow(tr("To"   ),    lineEditTo    = new QLineEdit(this));
         formLayout->addRow(tr("H diff"),   lineEditHdiff = new QLineEdit(this));
     }
-    else if (clusterName == GamaQ2::vecClusterName)
+    else if (clusterName == QGama::vecClusterName)
     {
         setWindowTitle(tr("Insert vector"));
 
@@ -137,17 +137,17 @@ void InsertObservationDialog::accept()
     isObsAngle = false;
 
     try {
-        if (clusterName == GamaQ2::obsClusterName) {
+        if (clusterName == QGama::obsClusterName) {
 
             QString name = comboObservation->currentText();
 
-            if (name==GamaQ2::dirObsName || name ==  GamaQ2::angleObsName ||
-               name == GamaQ2::zangleObsName || name == GamaQ2::azimObsName)
+            if (name==QGama::dirObsName || name ==  QGama::angleObsName ||
+               name == QGama::zangleObsName || name == QGama::azimObsName)
             {
                 acceptDegrees = true;    // see getDouble()
             }
 
-            if (name ==  GamaQ2::angleObsName)
+            if (name ==  QGama::angleObsName)
             {
                 isObsAngle = true;       // see getPointID
             }
@@ -167,25 +167,25 @@ void InsertObservationDialog::accept()
                 ObsInfo info;
                 info.rowType = ObservationTableModel::obsRow;
 
-                if (name == GamaQ2::distObsName) {
+                if (name == QGama::distObsName) {
                     info.observation = new GNU_gama::local::Distance(sp, t1, value);
                     info.observationNameIndex = ObservationTableModel::indDist;
-                } else if (name == GamaQ2::dirObsName) {
+                } else if (name == QGama::dirObsName) {
                     info.observation = new GNU_gama::local::Direction(sp, t1, value*G2R);
                     info.angular = true;
                     info.observationNameIndex = ObservationTableModel::indDir;
-                } else if (name == GamaQ2::angleObsName) {
+                } else if (name == QGama::angleObsName) {
                     info.observation = info.angle = new GNU_gama::local::Angle(sp, t1, t2, value*G2R);
                     info.angular = true;
                     info.observationNameIndex = ObservationTableModel::indAngle;
-                } else if (name == GamaQ2::azimObsName) {
+                } else if (name == QGama::azimObsName) {
                     info.observation = new GNU_gama::local::Azimuth(sp, t1, value);
                     info.angular = true;
                     info.observationNameIndex = ObservationTableModel::indAzimuth;
-                } else if (name == GamaQ2::slopeObsName) {
+                } else if (name == QGama::slopeObsName) {
                     info.observation = new S_Distance(sp, t1, value);
                     info.observationNameIndex = ObservationTableModel::indSdist;
-                } else if (name == GamaQ2::zangleObsName) {
+                } else if (name == QGama::zangleObsName) {
                     info.observation = new GNU_gama::local::Z_Angle(sp, t1, value*G2R);
                     info.angular = true;
                     info.observationNameIndex = ObservationTableModel::indZangle;
@@ -202,13 +202,13 @@ void InsertObservationDialog::accept()
                 throw;
             }
         }
-        else if (clusterName == GamaQ2::xyzClusterName) {
+        else if (clusterName == QGama::xyzClusterName) {
 
             bool bx = !lineEditX->text().simplified().isEmpty();
             bool by = !lineEditY->text().simplified().isEmpty();
             bool bz = !lineEditZ->text().simplified().isEmpty();
 
-            if (!bx && !by && !bz) setWarning(GamaQ2::xyzClusterName, tr("No coordinates"));
+            if (!bx && !by && !bz) setWarning(QGama::xyzClusterName, tr("No coordinates"));
 
             getPointID(tr("Point"), lineEditPoint);
 
@@ -233,7 +233,7 @@ void InsertObservationDialog::accept()
                 {
                     ObsInfo infoX, infoY;
                     infoX.rowType = infoY.rowType = ObservationTableModel::obsRow;
-                    infoX.group = infoY.group = GamaQ2::getUnique();
+                    infoX.group = infoY.group = QGama::getUnique();
 
                     infoX.observation = new X(point, x);
                     infoX.observationNameIndex = ObservationTableModel::indX;
@@ -263,7 +263,7 @@ void InsertObservationDialog::accept()
                 throw;
             }
         }
-        else if (clusterName == GamaQ2::hdfClusterName) {
+        else if (clusterName == QGama::hdfClusterName) {
 
             double value;
             getPointID(tr("From"),  lineEditFrom);
@@ -288,13 +288,13 @@ void InsertObservationDialog::accept()
                 obsinfo.push_back(info);
             }
             catch(const Exception& e) {
-                setWarning(GamaQ2::hdfClusterName, e.what());
+                setWarning(QGama::hdfClusterName, e.what());
             }
             catch (...) {
                 throw;
             }
         }
-        else if (clusterName == GamaQ2::vecClusterName) {
+        else if (clusterName == QGama::vecClusterName) {
 
             double vecXdiff, vecYdiff, vecZdiff;
             getPointID(tr("From"),   lineEditFrom);
@@ -314,7 +314,7 @@ void InsertObservationDialog::accept()
 
                 ObsInfo infoXdiff, infoYdiff, infoZdiff;
                 infoXdiff.rowType = infoYdiff.rowType = infoZdiff.rowType = ObservationTableModel::obsRow;
-                infoXdiff.group = infoYdiff.group = infoZdiff.group = GamaQ2::getUnique();
+                infoXdiff.group = infoYdiff.group = infoZdiff.group = QGama::getUnique();
 
                 infoXdiff.observation = new Xdiff(sp, tp, vecXdiff);
                 infoYdiff.observation = new Ydiff(sp, tp, vecYdiff);
@@ -329,7 +329,7 @@ void InsertObservationDialog::accept()
                 obsinfo.push_back(infoZdiff);
             }
             catch(const Exception& e) {
-                setWarning(GamaQ2::vecClusterName, e.what());
+                setWarning(QGama::vecClusterName, e.what());
             }
             catch (...) {
                 throw;

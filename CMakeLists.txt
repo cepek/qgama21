@@ -59,11 +59,11 @@ set(Q2SRC
     qgama/dbfunctions.h
     qgama/drawsettings.cpp
     qgama/drawsettings.h
-    qgama/gamaq2controlpanel.cpp
-    qgama/gamaq2controlpanel.h
-    qgama/gamaq2help.cpp
-    qgama/gamaq2help.h
-    qgama/gamaq2interfaces.h
+    qgama/qgamacontrolpanel.cpp
+    qgama/qgamacontrolpanel.h
+    qgama/qgamahelp.cpp
+    qgama/qgamahelp.h
+    qgama/qgamainterfaces.h
     qgama/importconfigurationfile.cpp
     qgama/importconfigurationfile.h
     qgama/insertclusterdialog.cpp

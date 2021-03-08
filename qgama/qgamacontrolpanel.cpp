@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gamaq2controlpanel.h"
+#include "qgamacontrolpanel.h"
 
 #include <QMenu>
 #include <QMessageBox>
@@ -34,9 +34,9 @@
 #include "dbfunctions.h"
 #include "importconfigurationfile.h"
 #include "networkadjustmentpanel.h"
-#include "gamaq2interfaces.h"
+#include "qgamainterfaces.h"
 #include "selectadjresultslanguage.h"
-#include "gamaq2help.h"
+#include "qgamahelp.h"
 
 #include <gnu_gama/local/localnetwork2sql.h>
 #include <gnu_gama/version.h>
@@ -45,7 +45,7 @@
 
 namespace
 {
-    GamaQ2ControlPanel* controlPanel;
+    QGamaControlPanel* controlPanel;
 
     // Solution after software.rtcm-ntrip.org by Leos Mervart (C) 2013
     template<typename Interface>
@@ -66,7 +66,7 @@ void ShowMessage(QString message)
 }
 
 
-GamaQ2ControlPanel::GamaQ2ControlPanel(QWidget *parent) :
+QGamaControlPanel::QGamaControlPanel(QWidget *parent) :
     QMainWindow(parent),
     init_language_list(true)
 {
@@ -74,43 +74,43 @@ GamaQ2ControlPanel::GamaQ2ControlPanel(QWidget *parent) :
 
     init_schema_lists();
 
-    GamaQ2::name      = "qgama";
-    GamaQ2::version   = "2.00";
-    GamaQ2::copyright = "2021";
+    QGama::name      = "qgama";
+    QGama::version   = "2.00.1";
+    QGama::copyright = "2021";
 
     // setting implicit adjustment results language
     set_adjustment_results_language();
 
-    setWindowTitle(GamaQ2::name);
+    setWindowTitle(QGama::name);
     load_plugins();
     build_menus();
     setMinimumSize(400, 150);
 }
 
-GamaQ2ControlPanel::~GamaQ2ControlPanel()
+QGamaControlPanel::~QGamaControlPanel()
 {
     // save options into database
-    QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
     if (db.isOpen())
     {
         QSqlQuery q(db);
         q.exec("DELETE FROM gnu_gama_local_options "
                "WHERE opt_key='AdjResultsLanguage'");
         q.exec("INSERT INTO gnu_gama_local_options (opt_key, opt_val) "
-               "VALUES ('AdjResultsLanguage','" + GamaQ2::currentLanguage + "')");
+               "VALUES ('AdjResultsLanguage','" + QGama::currentLanguage + "')");
     }
 }
 
-void GamaQ2ControlPanel::on_action_Exit_triggered()
+void QGamaControlPanel::on_action_Exit_triggered()
 {
     /* emit */ adjustmentPanel(false);
     close();
 }
 
-void GamaQ2ControlPanel::init_schema_lists()
+void QGamaControlPanel::init_schema_lists()
 {
-    QStringList& schema = GamaQ2::gama_local_schema;
-    QStringList& tables = GamaQ2::gama_local_schema_table_names;
+    QStringList& schema = QGama::gama_local_schema;
+    QStringList& tables = QGama::gama_local_schema_table_names;
 
     QFile rfile(":/lib/gama-local-schema.sql");
     rfile.open(QIODevice::ReadOnly);
@@ -162,7 +162,7 @@ void GamaQ2ControlPanel::init_schema_lists()
     tables << "gnu_gama_local_configurations";
 }
 
-void GamaQ2ControlPanel::build_menus()
+void QGamaControlPanel::build_menus()
 {
     QMenu* menuDb = new QMenu(tr("&Database"), this);
     actionDbConnect = menuDb->addAction(tr("&Connect to Database"));
@@ -179,7 +179,7 @@ void GamaQ2ControlPanel::build_menus()
 
     menuDb->addSeparator();
     actionImportExamples = menuDb->addAction(tr("Import Examples"));
-    connect(actionImportExamples, &QAction::triggered, this, &GamaQ2ControlPanel::import_examples);
+    connect(actionImportExamples, &QAction::triggered, this, &QGamaControlPanel::import_examples);
 
     if (!mapDbPlugins.empty())
     {
@@ -211,7 +211,7 @@ void GamaQ2ControlPanel::build_menus()
     actionGamaQ2help = menuHelp->addAction(tr("Qgama &help"));
     // the very first c++11 lambda function in qgama (2015-07-29)
     // https://wiki.qt.io/New_Signal_Slot_Syntax
-    connect(actionGamaQ2help, &QAction::triggered, [](){GamaQ2help::get()->show();});
+    connect(actionGamaQ2help, &QAction::triggered, [](){QGamaHelp::get()->show();});
     menuHelp->addSeparator();
     actionAboutGamaQ2 = menuHelp->addAction(tr("&About Qgama"));
     connect(actionAboutGamaQ2, SIGNAL(triggered()), SLOT(on_action_About_gama_q2_triggered()));
@@ -226,7 +226,7 @@ void GamaQ2ControlPanel::build_menus()
     menuBar()->addMenu(menuHelp);
 }
 
-void GamaQ2ControlPanel::dbSlot()
+void QGamaControlPanel::dbSlot()
 {
     if (PluginAction<DbInterface>* plugin_action = dynamic_cast<PluginAction<DbInterface>*>(sender()))
     {
@@ -238,7 +238,7 @@ void GamaQ2ControlPanel::dbSlot()
     }
 }
 
-void GamaQ2ControlPanel::closeEvent(QCloseEvent * event)
+void QGamaControlPanel::closeEvent(QCloseEvent * event)
 {
     QMessageBox confirm;
     confirm.setText(tr("Do you really want to exit the program?"));
@@ -253,7 +253,7 @@ void GamaQ2ControlPanel::closeEvent(QCloseEvent * event)
     if (dialogCode == QMessageBox::Yes)
     {
         event->accept();
-        GamaQ2help::get()->close();
+        QGamaHelp::get()->close();
         for (const auto& p : qAsConst(localPluginsList)) p->close();
     }
     else if (dialogCode == QMessageBox::YesAll)
@@ -265,7 +265,7 @@ void GamaQ2ControlPanel::closeEvent(QCloseEvent * event)
         }
 
         event->accept();
-        GamaQ2help::get()->close();
+        QGamaHelp::get()->close();
         for (const auto& p : qAsConst(localPluginsList)) p->close();
     }
     else
@@ -274,14 +274,14 @@ void GamaQ2ControlPanel::closeEvent(QCloseEvent * event)
     }
 }
 
-void GamaQ2ControlPanel::on_action_Connect_to_database_triggered()
+void QGamaControlPanel::on_action_Connect_to_database_triggered()
 {
-    DBConnectDialog* d = new DBConnectDialog(GamaQ2::connection_implicit_db, this);
+    DBConnectDialog* d = new DBConnectDialog(QGama::connection_implicit_db, this);
     connect(d, SIGNAL(input_data_open(bool)), this, SLOT(disable_input_data(bool)));
     d->exec();
     delete d;
 
-    QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
     if (db.isOpen())
     {
         QSqlQuery q(db);
@@ -296,7 +296,7 @@ void GamaQ2ControlPanel::on_action_Connect_to_database_triggered()
     }
 }
 
-void GamaQ2ControlPanel::disable_input_data(bool yes)
+void QGamaControlPanel::disable_input_data(bool yes)
 {
     actionDbConnect->setDisabled(yes);
 
@@ -312,44 +312,44 @@ void GamaQ2ControlPanel::disable_input_data(bool yes)
     if (yes) ShowMessage(tr("Connected to database"));
 }
 
-void GamaQ2ControlPanel::on_action_Import_configuration_file_triggered()
+void QGamaControlPanel::on_action_Import_configuration_file_triggered()
 {
     ImportConfigurationFile* icf = new ImportConfigurationFile(0);
     icf->exec();
 }
 
-void GamaQ2ControlPanel::on_action_Network_adjustment_triggered()
+void QGamaControlPanel::on_action_Network_adjustment_triggered()
 {
-    NetworkAdjustmentPanel* nap = new NetworkAdjustmentPanel(GamaQ2::connection_implicit_db);
+    NetworkAdjustmentPanel* nap = new NetworkAdjustmentPanel(QGama::connection_implicit_db);
     connect(nap,  SIGNAL(networkAdjustmentPanel(bool)), this, SLOT(adjustmentPanel(bool)));
     connect(this, SIGNAL(gamaCloseSignal()), nap, SLOT(close()));
     nap->setAttribute(Qt::WA_DeleteOnClose);
     nap->exec();
 }
 
-void GamaQ2ControlPanel::on_action_Drop_schema_Tables_triggered()
+void QGamaControlPanel::on_action_Drop_schema_Tables_triggered()
 {
     DB_DropTables* dbf = new DB_DropTables(this);
     if (dbf->exec())
     {
-        QSqlDatabase::removeDatabase(GamaQ2::connection_implicit_db);
+        QSqlDatabase::removeDatabase(QGama::connection_implicit_db);
         disable_input_data(false);
     }
 }
 
-void GamaQ2ControlPanel::on_action_Delete_all_Data_from_the_Schema_triggered()
+void QGamaControlPanel::on_action_Delete_all_Data_from_the_Schema_triggered()
 {
     DB_DeleteAllData* dbf = new DB_DeleteAllData(this);
     dbf->exec();
 }
 
-void GamaQ2ControlPanel::on_action_Delete_Network_Configuration_triggered()
+void QGamaControlPanel::on_action_Delete_Network_Configuration_triggered()
 {
     DB_DeleteNetworkConfiguration* dbf = new DB_DeleteNetworkConfiguration(this);
     dbf->exec();
 }
 
-void GamaQ2ControlPanel::load_plugins()
+void QGamaControlPanel::load_plugins()
 {
     QDir gamaq2plugins(qApp->applicationDirPath());
     gamaq2plugins.cd("plugins");
@@ -366,7 +366,7 @@ void GamaQ2ControlPanel::load_plugins()
     }
 }
 
-void GamaQ2ControlPanel::on_action_About_gama_q2_triggered()
+void QGamaControlPanel::on_action_About_gama_q2_triggered()
 {
     QMessageBox about(this);
     about.setIconPixmap(windowIcon().pixmap(iconSize().width()*2));
@@ -375,8 +375,8 @@ void GamaQ2ControlPanel::on_action_About_gama_q2_triggered()
     about.setTextFormat(Qt::RichText);
     about.setText(tr("<p>Adjustment of geodetic networks with database support</p>") +
 
-                  "<p><b>" + GamaQ2::name + "&nbsp;" + GamaQ2::version + "</b>"
-                  " Copyright (C) " + GamaQ2::copyright + " Aleš Čepek <i>et al.</i></p>"
+                  "<p><b>" + QGama::name + "&nbsp;" + QGama::version + "</b>"
+                  " Copyright (C) " + QGama::copyright + " Aleš Čepek <i>et al.</i></p>"
                   "<p>" +
                   QString(tr("Based on <a href='http://www.gnu.org/software/gama'>"
                              "GNU gama</a> version %1")
@@ -400,12 +400,12 @@ void GamaQ2ControlPanel::on_action_About_gama_q2_triggered()
     about.exec();
 }
 
-void GamaQ2ControlPanel::on_action_About_qt_triggered()
+void QGamaControlPanel::on_action_About_qt_triggered()
 {
     QMessageBox::aboutQt(this);
 }
 
-void GamaQ2ControlPanel::set_adjustment_results_language(QString language)
+void QGamaControlPanel::set_adjustment_results_language(QString language)
 {
     using namespace  GNU_gama::local;
 
@@ -431,7 +431,7 @@ void GamaQ2ControlPanel::set_adjustment_results_language(QString language)
     init_language_list = false;
 }
 
-void GamaQ2ControlPanel::on_action_Application_Font()
+void QGamaControlPanel::on_action_Application_Font()
 {
   bool ok {false};
   QFont font = QFontDialog::getFont(&ok, this);
@@ -443,23 +443,23 @@ void GamaQ2ControlPanel::on_action_Application_Font()
     }
 }
 
-bool GamaQ2ControlPanel::cmp(QString s, QString c)
+bool QGamaControlPanel::cmp(QString s, QString c)
 {
-    if (init_language_list) GamaQ2::languages.push_back(c);
+    if (init_language_list) QGama::languages.push_back(c);
 
     if (s != c) return false;
 
-    GamaQ2::currentLanguage = c;
+    QGama::currentLanguage = c;
     return true;
 }
 
-void GamaQ2ControlPanel::on_action_Adjustment_results_language()
+void QGamaControlPanel::on_action_Adjustment_results_language()
 {
     SelectAdjResultsLanguage dialog(this);
     dialog.exec();
 }
 
-void GamaQ2ControlPanel::adjustmentPanel(bool newPanel)
+void QGamaControlPanel::adjustmentPanel(bool newPanel)
 {
     static int count;
     if (newPanel) count++;
@@ -468,7 +468,7 @@ void GamaQ2ControlPanel::adjustmentPanel(bool newPanel)
     actionDbDropSchema->setDisabled(count > 0);
 }
 
-void GamaQ2ControlPanel::import_examples()
+void QGamaControlPanel::import_examples()
 {
     QString exdir { ":/examples/" };
     int count {0};
@@ -496,7 +496,7 @@ void GamaQ2ControlPanel::import_examples()
         std::stringstream sql;
         imp.write(sql, confName.toStdString());
 
-        QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+        QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
         QSqlQuery query(db);
 
         db.transaction();

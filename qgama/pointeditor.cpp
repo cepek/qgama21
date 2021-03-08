@@ -41,7 +41,7 @@ PointEditor::PointEditor(QWidget *parent) :
     PointTypeComboBox* combobox = new PointTypeComboBox(tableView);
     tableView->setItemDelegateForColumn(3, combobox);
     tableView->setItemDelegateForColumn(5, combobox);
-    tableView->setStyleSheet(GamaQ2::delegate_style_sheet);
+    tableView->setStyleSheet(QGama::delegate_style_sheet);
 
     enableEdit(false);
 

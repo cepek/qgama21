@@ -19,7 +19,7 @@
 
 #include "selectadjresultslanguage.h"
 #include "constants.h"
-#include "gamaq2controlpanel.h"
+#include "qgamacontrolpanel.h"
 #include <QLabel>
 #include <QComboBox>
 #include <QDialogButtonBox>
@@ -33,9 +33,9 @@ SelectAdjResultsLanguage::SelectAdjResultsLanguage(QWidget *parent) :
                                            | QDialogButtonBox::Cancel);
     comboBox = new QComboBox;
     label = new QLabel;
-    comboBox->insertItems(0, GamaQ2::languages);
-    comboBox->setCurrentText(GamaQ2::currentLanguage);
-    label->setText(GamaQ2::currentLanguage);
+    comboBox->insertItems(0, QGama::languages);
+    comboBox->setCurrentText(QGama::currentLanguage);
+    label->setText(QGama::currentLanguage);
 
     QFormLayout* formLayout = new QFormLayout;
     formLayout->addRow(tr("Current language ISO 639-1 code"), label);
@@ -57,9 +57,9 @@ SelectAdjResultsLanguage::~SelectAdjResultsLanguage()
 void SelectAdjResultsLanguage::on_buttonBox_accepted()
 {
     QString code = comboBox->currentText();
-    if (code != GamaQ2::currentLanguage)
+    if (code != QGama::currentLanguage)
     {
-       GamaQ2ControlPanel* panel = dynamic_cast<GamaQ2ControlPanel*>(parent());
+       QGamaControlPanel* panel = dynamic_cast<QGamaControlPanel*>(parent());
        if (panel == nullptr) return;
 
        panel->set_adjustment_results_language(code);

@@ -24,7 +24,7 @@
 #include <QStringList>
 #include <QColor>
 
-namespace GamaQ2
+namespace QGama
 {
     extern QString name;
     extern QString version;

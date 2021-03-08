@@ -17,20 +17,38 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GAMAQ2HELP_H
-#define GAMAQ2HELP_H
+#include "qgamahelp.h"
 
-#include <QMainWindow>
+#include <QTextEdit>
+#include <QFile>
+#include <QDebug>
 
-class GamaQ2help : public QMainWindow
+/* The C++11 standard §6.7.4:
+ *           If control enters the declaration concurrently while the variable
+ *           is being initialized, the concurrent execution shall wait for
+ *           completion of the initialization.
+ */
+QGamaHelp* QGamaHelp::get()
 {
-    Q_OBJECT
-public:
+    static QGamaHelp help;
+    return &help;
+}
 
-     static GamaQ2help* get();
 
-private:
-     explicit GamaQ2help(QWidget *parent = nullptr);
-};
+// private constructor
 
-#endif // GAMAQ2HELP_H
+QGamaHelp::QGamaHelp(QWidget *parent) : QMainWindow(parent)
+{
+    setWindowTitle(tr("Qgama help"));
+
+    QFile file(":/help/qgama.html");
+    file.open(QIODevice::ReadOnly);
+    QString text = file.readAll();
+
+    auto edit = new QTextEdit;
+    edit->setMinimumSize(800,500);
+    edit->setText(text);
+    edit->setReadOnly(true);
+
+    setCentralWidget(edit);
+}

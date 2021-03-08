@@ -130,7 +130,7 @@ void ImportConfigurationFile::exec()
 
 void ImportConfigurationFile::configure()
 {
-    QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
     QSqlQuery query(db);
 
     {
@@ -275,7 +275,7 @@ void ImportConfigurationFile::import_configuration()
     }
     while (repeat);   // do try ... while (repeat)
 
-    QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
     QSqlQuery query(db);
 
     db.transaction();

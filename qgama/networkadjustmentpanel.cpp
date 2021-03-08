@@ -28,8 +28,8 @@
 #include "pointeditor.h"
 #include "observationeditor.h"
 #include "adjustmentresults.h"
-#include "gamaq2help.h"
-#include "gamaq2interfaces.h"
+#include "qgamahelp.h"
+#include "qgamainterfaces.h"
 
 #include <sstream>
 #include <fstream>
@@ -278,7 +278,7 @@ void NetworkAdjustmentPanel::getConfigurationName(QString conf, bool tabbed)
     configuration_name = conf;
     setWindowTitle(tr("Network Adjustment '%1'").arg(conf));
 
-    QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
     QSqlQuery query(db);
 
     try
@@ -466,7 +466,7 @@ void NetworkAdjustmentPanel::action_Export_adjustment_results_as_plain_text()
         std::istringstream xml(data);
         adjres.read_xml(xml);
 
-        QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+        QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
         QSqlQuery query(db);
         query.exec(QString("SELECT * "
                            "FROM gnu_gama_local_configurations "
@@ -728,7 +728,7 @@ void NetworkAdjustmentPanel::save_configuration(QString confname)
     QStringList sql = QString::fromUtf8(sqlbatch.str().c_str())
             .split(QRegularExpression(";[\\s+]"),Qt::SkipEmptyParts);
 
-    QSqlDatabase db = QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase db = QSqlDatabase::database(QGama::connection_implicit_db);
     db.transaction();
     QSqlQuery q(db);
 
@@ -805,7 +805,7 @@ void NetworkAdjustmentPanel::set_gui_adjustment_functions_status(bool isvalid)
 
 void NetworkAdjustmentPanel::action_Gama_q2_help()
 {
-    GamaQ2help::get()->show();
+    QGamaHelp::get()->show();
 }
 
 void NetworkAdjustmentPanel::AdjustmentPluginSlot()

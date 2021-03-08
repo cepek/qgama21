@@ -29,10 +29,10 @@ InsertClusterDialog::InsertClusterDialog(QWidget *parent) :
     comboBoxClusterName = new QComboBox(this);
     comboBoxPosition = new QComboBox(this);
 
-    comboBoxClusterName->addItem(GamaQ2::obsClusterName);
-    comboBoxClusterName->addItem(GamaQ2::xyzClusterName);
-    comboBoxClusterName->addItem(GamaQ2::hdfClusterName);
-    comboBoxClusterName->addItem(GamaQ2::vecClusterName);
+    comboBoxClusterName->addItem(QGama::obsClusterName);
+    comboBoxClusterName->addItem(QGama::xyzClusterName);
+    comboBoxClusterName->addItem(QGama::hdfClusterName);
+    comboBoxClusterName->addItem(QGama::vecClusterName);
 
     comboBoxPosition->addItem(tr("Last item in the cluster list"));
     comboBoxPosition->addItem(tr("After the selected cluster"));

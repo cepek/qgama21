@@ -17,8 +17,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GAMAQ2INTERFACES_gama_q2_interfaces_H
-#define GAMAQ2INTERFACES_gama_q2_interfaces_H
+#ifndef QGAMA_INTERFACES_qgama_interfaces_H
+#define QGAMA_INTERFACES_qgama_interfaces_H
 
 #include <QString>
 class QWidget;
@@ -50,4 +50,4 @@ QT_BEGIN_NAMESPACE
 Q_DECLARE_INTERFACE(AdjustmentInterface, "org.gnu.gama.gama-q2.AdjustmentInterface/1.0")
 QT_END_NAMESPACE
 
-#endif // GAMAQ2INTERFACES_gama_q2_interfaces_H
+#endif // QGAMA_INTERFACES_qgama_interfaces_H

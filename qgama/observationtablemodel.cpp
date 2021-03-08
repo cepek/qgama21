@@ -31,7 +31,7 @@
 #include <typeinfo>
 
 typedef GNU_gama::local::LocalNetwork    LocalNetwork;
-using namespace GamaQ2;
+using namespace QGama;
 
 /* implementation of private structure ObsInfo - information on an Observation */
 // -------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ ObservationTableModel::ObsInfo::ObsInfo()
 {
     if (obsNames.size() == 0)
     {
-        using namespace GamaQ2;
+        using namespace QGama;
         obsNames << distObsName  << dirObsName  << angleObsName << azimObsName << hdifObsName    // see constants.cpp
                  << xdifObsName  << ydifObsName << zdifObsName  << xObsName << yObsName << zObsName
                  << slopeObsName << zangleObsName;
@@ -265,7 +265,7 @@ void ObservationTableModel::initObsMap()
         if (xyz) xyz = infoY.observationNameIndex == indY;
         if (xyz) xyz = infoX.observation != 0 && infoY.observation != 0;
         if (xyz) xyz = infoX.observation->from() == infoY.observation->from();
-        if (xyz) infoX.group = infoY.group = GamaQ2::getUnique();
+        if (xyz) infoX.group = infoY.group = QGama::getUnique();
 
         ObsInfo& infoZ = obsMap[i+2];
         if (vec) vec = infoY.observationNameIndex == indYdiff && infoZ.observationNameIndex == indZdiff;
@@ -274,7 +274,7 @@ void ObservationTableModel::initObsMap()
         if (vec) vec = infoY.observation->from() == infoZ.observation->from();
         if (vec) vec = infoX.observation->to() == infoY.observation->to();
         if (vec) vec = infoY.observation->to() == infoZ.observation->to();
-        if (vec) infoX.group = infoY.group = infoZ.group = GamaQ2::getUnique();
+        if (vec) infoX.group = infoY.group = infoZ.group = QGama::getUnique();
     }
 }
 
@@ -332,18 +332,18 @@ QVariant ObservationTableModel::data(const QModelIndex &index, int role) const
         {
             int r = info.clusterIndex;
             int b = col - indColumnCount;
-            if (r+b > info.cluster->covariance_matrix.cols())      return GamaQ2::colorOutsideCovMat;
-            if ( b  > info.cluster->covariance_matrix.bandWidth()) return GamaQ2::colorPassiveBackground;
+            if (r+b > info.cluster->covariance_matrix.cols())      return QGama::colorOutsideCovMat;
+            if ( b  > info.cluster->covariance_matrix.bandWidth()) return QGama::colorPassiveBackground;
             // !info.positiveDefinite ... would not work here, why?
-            if (!obsMap[row].positiveDefinite)                     return GamaQ2::colorSingularCovMat;
+            if (!obsMap[row].positiveDefinite)                     return QGama::colorSingularCovMat;
             return QVariant();
         }
 
-        if (info.rowType == clusterHeader) return GamaQ2::colorClusterHeader;
+        if (info.rowType == clusterHeader) return QGama::colorClusterHeader;
         if (info.observation)
         {
-            if ( info.observation->stdDev() <= 0 && col == indStdev) return GamaQ2::colorSingularCovMat;
-            if (!info.observation->active()) return GamaQ2::colorPassiveBackground;
+            if ( info.observation->stdDev() <= 0 && col == indStdev) return QGama::colorSingularCovMat;
+            if (!info.observation->active()) return QGama::colorPassiveBackground;
         }
 
         return QVariant();
@@ -730,10 +730,10 @@ void ObservationTableModel::deleteCluster(int logicalIndex)
 void ObservationTableModel::insertCluster(int logicalIndex, int position, QString clusterName)
 {
     Cluster* cluster = nullptr;
-    if      (clusterName == GamaQ2::obsClusterName) cluster = new GNU_gama::local::StandPoint(&obsData);
-    else if (clusterName == GamaQ2::xyzClusterName) cluster = new GNU_gama::local::Coordinates(&obsData);
-    else if (clusterName == GamaQ2::hdfClusterName) cluster = new GNU_gama::local::HeightDifferences(&obsData);
-    else if (clusterName == GamaQ2::vecClusterName) cluster = new GNU_gama::local::Vectors(&obsData);
+    if      (clusterName == QGama::obsClusterName) cluster = new GNU_gama::local::StandPoint(&obsData);
+    else if (clusterName == QGama::xyzClusterName) cluster = new GNU_gama::local::Coordinates(&obsData);
+    else if (clusterName == QGama::hdfClusterName) cluster = new GNU_gama::local::HeightDifferences(&obsData);
+    else if (clusterName == QGama::vecClusterName) cluster = new GNU_gama::local::Vectors(&obsData);
 
     if (cluster == nullptr) return;
 

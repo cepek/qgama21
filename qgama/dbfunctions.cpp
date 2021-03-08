@@ -103,7 +103,7 @@ bool DropDeleteBase::exec()
     {
         if (needsConfName)
         {
-            SelectConfiguration* sc = new SelectConfiguration(GamaQ2::connection_implicit_db, false, false, this);
+            SelectConfiguration* sc = new SelectConfiguration(QGama::connection_implicit_db, false, false, this);
             connect(sc, SIGNAL(selectConfiguration(QString)), this, SLOT(getConfigurationName(QString)));
             sc->select();
             return success;
@@ -118,7 +118,7 @@ bool DropDeleteBase::exec()
 
 void DropDeleteBase::drop_or_delete_schema_tables()
 {
-    QSqlDatabase impl= QSqlDatabase::database(GamaQ2::connection_implicit_db);
+    QSqlDatabase impl= QSqlDatabase::database(QGama::connection_implicit_db);
     if (!impl.isOpen())
     {
         QMessageBox::critical(this, tr("Database Connection Failed"), critical_2);
@@ -130,7 +130,7 @@ void DropDeleteBase::drop_or_delete_schema_tables()
 
     impl.transaction();
 
-    QStringList tables = GamaQ2::gama_local_schema_table_names;
+    QStringList tables = QGama::gama_local_schema_table_names;
     if (query_string.startsWith("DELETE")) tables.removeOne("gnu_gama_local_schema_version");
     if (needsConfName)                     tables.removeOne("gnu_gama_local_options");
     for (QStringList::const_iterator i=tables.cbegin(), e=tables.cend(); i!=e; ++i)
