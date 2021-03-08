@@ -35,6 +35,7 @@ compare() {
 
 echo
 echo "Finding differences for"
+compare "CMakeLists.txt"
 compare "*.cpp"
 compare "*.h"
 compare "*.txt"
