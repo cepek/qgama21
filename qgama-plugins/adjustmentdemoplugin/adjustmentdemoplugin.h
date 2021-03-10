@@ -22,7 +22,7 @@
 
 #include <QObject>
 #include <QString>
-#include "gamaq2interfaces.h"
+#include "qgamainterfaces.h"
 
 namespace GNU_gama {
 namespace local {
@@ -38,7 +38,7 @@ class QFrame;
 class AdjustmentDemoPlugin : public QObject, AdjustmentInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.gnu.gama.gama-q2.AdjustmentInterface/1.0")
+    Q_PLUGIN_METADATA(IID "org.gnu.gama.qgama.AdjustmentInterface/1.0")
     Q_INTERFACES(AdjustmentInterface)
 
 public:

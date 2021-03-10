@@ -117,4 +117,16 @@ endif()
 target_link_libraries(qgama PRIVATE
   Qt6::Widgets Qt6::Sql Qt6::PrintSupport Qt6::SvgWidgets)
 
+# Building with plugins by default. If you don't want to build plugins,
+# use the following option to disable them
+
+OPTION(BUILD_PLUGINS "Build with plugins." ON)
+if(BUILD_PLUGINS)
+    add_subdirectory(qgama-plugins/adjustmentdemoplugin)
+    add_subdirectory(qgama-plugins/dbdemoplugin)
+    target_link_libraries(adjustmentdemoplugin)
+    target_link_libraries(dbdemoplugin)
+endif(BUILD_PLUGINS)
+
+
 add_subdirectory(gama)  # git clone https://git.savannah.gnu.org/git/gama.git
