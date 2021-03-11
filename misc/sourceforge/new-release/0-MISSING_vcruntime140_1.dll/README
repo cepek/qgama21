@@ -1,11 +1,11 @@
 
-If you see a message "vcruntime140_1.dll is missing" after starting gama-q2.exe,
+If you see a message "vcruntime140_1.dll is missing" after starting qgama.exe,
 you need to fix the problem. The simplest dirty solution is to copy missing dll
 library from the folder 0-MISSING_vcruntime140_1.dll one level up (it is to the
-folder where gama-q2 resides). 
+folder where qgama resides).
 
 
-If you want to install the missing library correctly to your Windows 10, follow 
+If you want to install the missing library correctly to your Windows 10, follow
 instructions from
 
 https://answers.microsoft.com/en-us/windows/forum/windows_10-update/vcruntime140dll/b1a15b0e-e389-41a3-bc49-f4fc85bac575
@@ -14,4 +14,3 @@ https://answers.microsoft.com/en-us/windows/forum/windows_10-update/vcruntime140
 The missing dll can be downloaded from many internet sites, you cat start with
 
 https://www.dll-files.com/vcruntime140_1.dll.html
-
