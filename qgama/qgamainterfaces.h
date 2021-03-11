@@ -34,7 +34,7 @@ public:
 };
 
 QT_BEGIN_NAMESPACE
-Q_DECLARE_INTERFACE(DbInterface, "org.gnu.gama.gama-q2.DbInterface/1.0")
+Q_DECLARE_INTERFACE(DbInterface, "org.gnu.gama.qgama.DbInterface/1.0")
 QT_END_NAMESPACE
 
 
@@ -47,7 +47,7 @@ public:
 };
 
 QT_BEGIN_NAMESPACE
-Q_DECLARE_INTERFACE(AdjustmentInterface, "org.gnu.gama.gama-q2.AdjustmentInterface/1.0")
+Q_DECLARE_INTERFACE(AdjustmentInterface, "org.gnu.gama.qgama.AdjustmentInterface/1.0")
 QT_END_NAMESPACE
 
 #endif // QGAMA_INTERFACES_qgama_interfaces_H
